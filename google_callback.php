@@ -35,6 +35,7 @@ unset($_SESSION['oauth_state']);
 ---------------------------- */
 if (!isset($_GET['code'])) {
     header("Location: google_login.php");
+    exit();
 }
 
 $client->authenticate($_GET['code']);

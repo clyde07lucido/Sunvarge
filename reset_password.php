@@ -35,6 +35,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $error = "All fields are required.";
 
+    } elseif (
+        strlen($password) < 8 ||
+        !preg_match('/[A-Z]/', $password) ||
+        !preg_match('/[a-z]/', $password) ||
+        !preg_match('/[0-9]/', $password) ||
+        !preg_match('/[\W]/', $password)
+    ) {
+
+        $error = "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.";
+
     } elseif ($password !== $confirm) {
 
         $error = "Passwords do not match.";
@@ -110,6 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     name="password"
                     class="input-field"
                     placeholder="Enter New Password"
+                    minlength="8"
                     required
                 >
 
@@ -128,6 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     name="confirm_password"
                     class="input-field"
                     placeholder="Confirm New Password"
+                    minlength="8"
                     required
                 >
 
